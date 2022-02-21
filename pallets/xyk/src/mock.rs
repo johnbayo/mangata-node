@@ -68,6 +68,7 @@ impl system::Config for Test {
 	type BlockLength = ();
 	type SS58Prefix = ();
 	type OnSetCode = ();
+	type MaxConsumers = frame_support::traits::ConstU32<16>;
 }
 
 parameter_type_with_key! {
@@ -144,6 +145,21 @@ impl<T: Config> Pallet<T> {
 	}
 	pub fn total_supply(id: TokenId) -> Balance {
 		<T as Config>::Currency::total_issuance(id.into()).into()
+	}
+	pub fn transfer(
+		currency_id: TokenId,
+		source: T::AccountId,
+		dest: T::AccountId,
+		value: Balance,
+	) -> DispatchResult {
+		<T as Config>::Currency::transfer(
+			currency_id.into(),
+			&source,
+			&dest,
+			value.into(),
+			ExistenceRequirement::KeepAlive,
+		)
+		.into()
 	}
 	pub fn create_new_token(who: &T::AccountId, amount: Balance) -> TokenId {
 		<T as Config>::Currency::create(who, amount.into())
