@@ -3,6 +3,7 @@
 //! Provides functions for token operations, swapping tokens, creating token pools, minting and burning liquidity and supporting public functions
 //!
 //! ### Token operation functions:
+//!
 //! - create_pool
 //! - mint_liquidity
 //! - burn_liquidity
