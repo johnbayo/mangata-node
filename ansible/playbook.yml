@@ -1,6 +1,10 @@
 ---
-- hosts: all #all
+- hosts: all 
+  vars_files:
+    - "vars/main.yml"
+    - "defaults/main.yml"
   become: true
+  gather_facts: true
   roles:
     - docker
     #- mangata

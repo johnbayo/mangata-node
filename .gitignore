@@ -20,3 +20,7 @@ docker-cargo
 node_modules
 output/
 devops/parachain/config/state
+
+# second interview
+.terraform/
+sshkey*

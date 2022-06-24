@@ -1,26 +1,42 @@
 ---
-- include_tasks: setup-RedHat.yml
-  when: ansible_os_family == 'RedHat'
+- name: Install aptitude
+  apt:
+    name: aptitude
+    state: latest
+    update_cache: true
 
-- include_tasks: setup-Debian.yml
-  when: ansible_os_family == 'Debian'
+- name: Install required system packages
+  apt:
+    pkg:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - software-properties-common
+      - python3-pip
+      - virtualenv
+      - python3-setuptools
+    state: latest
+    update_cache: true
 
-- name: Install Docker.
-  package:
-    name: "{{ docker_package }}"
-    state: "{{ docker_package_state }}"
-  notify: restart docker
-  ignore_errors: "{{ ansible_check_mode }}"
-  when: "ansible_version.full is version_compare('2.12', '<') or ansible_os_family not in ['RedHat', 'Debian']"
+- name: Add Docker GPG apt Key
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
 
-- name: Install Docker (with downgrade option).
-  package:
-    name: "{{ docker_package }}"
-    state: "{{ docker_package_state }}"
-    allow_downgrade: true
-  notify: restart docker
-  ignore_errors: "{{ ansible_check_mode }}"
-  when: "ansible_version.full is version_compare('2.12', '>=') and ansible_os_family in ['RedHat', 'Debian']"
+- name: Add Docker Repository
+  apt_repository:
+    repo: deb https://download.docker.com/linux/ubuntu focal stable
+    state: present
+
+- name: Update apt and install docker-ce
+  apt:
+    name: docker-ce
+    state: latest
+    update_cache: true
+
+- name: Install Docker Module for Python
+  pip:
+    name: docker
 
 - name: Ensure /etc/docker/ directory exists.
   file:
@@ -52,3 +68,4 @@
 
 - include_tasks: docker-users.yml
   when: docker_users | length > 0
+
