@@ -17,7 +17,7 @@ on:
     AWS_SECRET_ACCESS_KEY: ${{ secrets.Terraform_SECRET_KEY }}
 
 jobs:
-  deploy-maganta:
+  deploy-infrastructure:
 
     runs-on: ubuntu-latest
 
@@ -45,10 +45,21 @@ jobs:
           continue-on-error: true
         #- name: apply the templates
         #  run: terraform apply --auto-approve
-        #- name: setup and check ansible connectivity
-        #  run: |
-        #    mkdir ~/.ssh && chmod 700 ~/.ssh && export ANSIBLE_PRIVATE_KEY_FILE="~/.ssh/id_rsa" && "chmod 400 ~/.ssh/*"
-        #    ansible -m ping all
-        #- name: rollout the configmanagement
-        #  run: |
-        #    ansible-playbook -i inventories/deploy.yml rollout_playbook.yml
+      
+  deploy-configmanagement:
+
+    runs-on: ubuntu-latest
+      
+    steps:
+    - uses: actions/checkout@v1
+    - uses: ./.github/actions/ansible
+
+      - name: Lint Ansible Playbook
+          uses: ansible/ansible-lint-action@master
+          with:
+            targets: ""
+      - name: setup and check ansible connectivity
+        run: ansible -m ping all
+      #- name: rollout the configmanagement
+      #  run: |
+      #    ansible-playbook -i inventories/deploy.yml rollout_playbook.yml
