@@ -2,6 +2,16 @@
 # A list of users who will be added to the docker group.
 docker_users: [ubuntu]
 
+mangata_user: "ubuntu"
+
+mangata_directory_name: "mangata"
+
 # Docker daemon options as a dict
 docker_daemon_options: {}
-    
+
+deployment_path: /home/{{ mangata_user }}/{{ mangata_directory_name }}
+
+mangata_image_version: rococo-latest
+#docker-compose file
+stackcomponents:
+  - { name: 'docker-compose.yml', path: '{{ deployment_path }}' }
