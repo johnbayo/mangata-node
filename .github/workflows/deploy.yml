@@ -1,0 +1,54 @@
+name: Deployment
+
+#on: 
+#  pull_request:
+#    branches: [*]
+
+on:
+    push: 
+      branches: 
+        - feature/second-interview 
+      paths:
+        - "terraform/**"  
+  
+  env:
+    DEPLOY_DIR: "terraform/"
+    AWS_ACCESS_KEY_ID: ${{ secrets.Terraform_ACCESS_KEY }}
+    AWS_SECRET_ACCESS_KEY: ${{ secrets.Terraform_SECRET_KEY }}
+
+jobs:
+  deploy-maganta:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        - uses: actions/checkout@v3
+        - uses: hashicorp/setup-terraform@v3
+
+        - name: Terraform fmt
+          id: fmt
+          run: terraform fmt -check
+          continue-on-error: true
+        
+        - name: Terraform Init
+          id: init
+          run: terraform init -backend
+        
+        - name: Terraform Validate
+          id: validate
+          run: terraform validate -no-color
+        
+        - name: Terraform Plan
+          id: plan
+          run: terraform plan -no-color -lock=false
+          continue-on-error: true
+        #- name: apply the templates
+        #  run: terraform apply --auto-approve
+        #- name: setup and check ansible connectivity
+        #  run: |
+        #    mkdir ~/.ssh && chmod 700 ~/.ssh && export ANSIBLE_PRIVATE_KEY_FILE="~/.ssh/id_rsa" && "chmod 400 ~/.ssh/*"
+        #    ansible -m ping all
+        #- name: rollout the configmanagement
+        #  run: |
+        #    ansible-playbook -i inventories/deploy.yml rollout_playbook.yml

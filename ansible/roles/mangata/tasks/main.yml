@@ -9,18 +9,16 @@
     src: "../devops/"
     dest: "{{ mangata_directory_name }}" 
     directory_mode: yes
+    owner: ubuntu
+    group: ubuntu
+    mode: '0644'
 
-#- name: start the mangata node
-#  shell: "docker run -itd mangatasolutions/mangata-node:{{ mangata_image_version }}" 
-    
-#- name: Copying template files to designated directories 
-#  template: src=templates/{{ item.name }}.j2 dest={{ item.path }}
-#  loop: "{{ stackcomponents }}" 
-#  notify: restart docker
+- name: Copying template files to designated directories 
+  template: src=templates/{{ item.name }}.j2 dest={{ item.path }}
+  loop: "{{ stackcomponents }}" 
 
-#- name: stopping the mangata node if needed
-#  shell: "docker-compose -f /home/{{ mangata_user }}/{{ deployment_path }}/docker-compose.yml down" 
-
+- name: pulling the mangata node images
+  shell: "docker-compose -f {{ deployment_path }}/parachain/docker-compose.yml pull" 
 
 - name: running the mangata node 
-  shell: "docker-compose -f {{ deployment_path }}/multivalidator-dev-chainspec-patched-updated.json up -d"
+  shell: "docker-compose --env-file env/{{ mangata_env }} -f {{ deployment_path }}/parachain/docker-compose.yml up -d"
