@@ -54,10 +54,6 @@ jobs:
       uses: actions/checkout@v1
     - name: setup ansible
       uses: ./.github/actions/ansible
-    - name: Lint Ansible Playbook
-      uses: ansible/ansible-lint-action@master
-      with:
-        targets: ""
     - name: setup and check ansible connectivity
       run: | 
         ansible -m ping all
