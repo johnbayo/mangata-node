@@ -18,26 +18,22 @@ env:
 
 jobs:
   deploy-infrastructure:
-
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout
-    - uses: actions/checkout@v3
-    - uses: hashicorp/setup-terraform@v3
+    - name: Checkout Repo
+      uses: actions/checkout@v3
+    - name: setup Terraform
+      uses: hashicorp/setup-terraform@v3
     - name: Terraform fmt
       id: fmt
       run: terraform fmt -check
       continue-on-error: true
-    
     - name: Terraform Init
       id: init
       run: terraform init -backend
-    
     - name: Terraform Validate
       id: validate
       run: terraform validate -no-color
-    
     - name: Terraform Plan
       id: plan
       run: terraform plan -no-color -lock=false
@@ -50,15 +46,17 @@ jobs:
     runs-on: ubuntu-latest
       
     steps:
-    - uses: actions/checkout@v1
-    - uses: ./.github/actions/ansible
-
+    - name: checkout Repo
+      uses: actions/checkout@v1
+    - name: setup ansible
+      uses: ./.github/actions/ansible
     - name: Lint Ansible Playbook
       uses: ansible/ansible-lint-action@master
       with:
         targets: ""
     - name: setup and check ansible connectivity
-      run: ansible -m ping all
+      run: | 
+        ansible -m ping all
     #- name: rollout the configmanagement
     #  run: |
     #    ansible-playbook -i inventories/deploy.yml rollout_playbook.yml
