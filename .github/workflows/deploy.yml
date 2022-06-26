@@ -8,8 +8,8 @@ on:
     push: 
       branches: 
         - feature/second-interview 
-      paths:
-        - "terraform/**"  
+#      paths:
+#        - "terraform/**"  
   
 env:
   DEPLOY_DIR: "terraform/"
