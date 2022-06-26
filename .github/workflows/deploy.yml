@@ -54,9 +54,9 @@ jobs:
     - uses: ./.github/actions/ansible
 
     - name: Lint Ansible Playbook
-        uses: ansible/ansible-lint-action@master
-        with:
-          targets: ""
+      uses: ansible/ansible-lint-action@master
+      with:
+        targets: ""
     - name: setup and check ansible connectivity
       run: ansible -m ping all
     #- name: rollout the configmanagement
