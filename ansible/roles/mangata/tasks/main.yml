@@ -2,7 +2,10 @@
 - name: create mangata deployment directory
   file:
     path: "{{ mangata_directory_name }}" 
-    state: directory  
+    state: directory
+    owner: ubuntu
+    group: ubuntu
+    mode: '0644'
 
 - name: copy mangata deployment directory recursively to its path 
   copy:
@@ -14,7 +17,12 @@
     mode: '0644'
 
 - name: Copying template files to designated directories 
-  template: src=templates/{{ item.name }}.j2 dest={{ item.path }}
+  template: 
+    src: templates/{{ item.name }}.j2 
+    dest: {{ item.path }}
+    owner: ubuntu
+    group: ubuntu
+    mode: '0644'
   loop: "{{ stackcomponents }}" 
 
 - name: pulling the mangata node images
