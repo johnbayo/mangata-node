@@ -56,7 +56,7 @@ jobs:
     - name: checkout Repo
       uses: actions/checkout@v1
     - name: setup ansible
-      uses: ./.github/actions/ansible
+      uses: dawidd6/action-ansible-playbook@v2
     - name: setup and check ansible connectivity
       run: | 
         ansible -i inventories/inventory.yml -m ping all
