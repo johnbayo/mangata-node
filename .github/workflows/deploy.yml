@@ -42,8 +42,8 @@ jobs:
       id: plan
       run: terraform plan -no-color -lock=false
       continue-on-error: true
-    #- name: apply the templates
-    #  run: terraform apply --auto-approve
+    - name: apply the templates
+      run: terraform apply --auto-approve -lock=false
       
   deploy-configmanagement:
 
