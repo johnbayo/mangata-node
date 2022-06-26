@@ -48,6 +48,9 @@ jobs:
   deploy-configmanagement:
 
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./ansible
       
     steps:
     - name: checkout Repo
@@ -56,7 +59,7 @@ jobs:
       uses: ./.github/actions/ansible
     - name: setup and check ansible connectivity
       run: | 
-        ansible -m ping all
-    #- name: rollout the configmanagement
-    #  run: |
-    #    ansible-playbook -i inventories/deploy.yml rollout_playbook.yml
+        ansible -i inventories/inventory.yml -m ping all
+    - name: rollout the configmanagement
+      run: |
+        ansible-playbook -i inventories/inventory.yml playbook.yml
