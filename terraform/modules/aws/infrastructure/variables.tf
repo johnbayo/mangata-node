@@ -29,7 +29,7 @@ variable "pub_ip_assoc" {
 }
 
 variable "private_ipaddress" {
-    
+
 }
 
 variable "inventory_path" {
