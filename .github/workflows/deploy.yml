@@ -15,6 +15,7 @@ env:
   DEPLOY_DIR: "terraform/"
   AWS_ACCESS_KEY_ID: ${{ secrets.Terraform_ACCESS_KEY }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.Terraform_SECRET_KEY }}
+  AWS_DEFAULT_REGION: eu-central-1
 
 jobs:
   deploy-infrastructure:
