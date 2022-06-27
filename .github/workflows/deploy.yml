@@ -44,6 +44,15 @@ jobs:
       continue-on-error: true
     - name: apply the templates
       run: terraform apply --auto-approve -lock=false
+    - name: list ssh key directory
+      run: |
+          ls -alh ${GITHUB_WORKSPACE}/ansible/files/
+    - name: list inventories
+      run: |
+        ls -alh ${GITHUB_WORKSPACE}/ansible/inventories/
+    - name: pwd
+      run: |
+         pwd           
     - uses: actions/upload-artifact@master
       with:
         name: sshkey
