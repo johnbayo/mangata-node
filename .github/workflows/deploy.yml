@@ -64,11 +64,11 @@ jobs:
 
 #    runs-on: ubuntu-latest
 #    needs: deploy-infrastructure
-    defaults:
-      run:
-        working-directory: ./ansible
+    #defaults:
+    #  run:
+    #    working-directory: ./ansible
       
-    steps:
+    #steps:
     #- name: checkout Repo
     #  uses: actions/checkout@v3
     #- uses: actions/download-artifact@v3
@@ -81,10 +81,12 @@ jobs:
     - name: list ssh key directory
       run: |
           ls -alh ./ansible/files
+      working-directory: ./ansible
     - name: set up python 3.7
       uses: actions/setup-python@v1
       with:
         python-version: 3.7
+      working-directory: ./ansible
     - name: working directory
       run: |
           pwd
@@ -95,6 +97,8 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install ansible==2.9.2 requests
+      working-directory: ./ansible
     - name: run exporters playbook
       run: |
         ansible-playbook -i inventories/inventory.yml playbook.yml
+      working-directory: ./ansible
