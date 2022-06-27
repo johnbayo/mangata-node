@@ -44,19 +44,23 @@ jobs:
       continue-on-error: true
     - name: apply the templates
       run: terraform apply --auto-approve -lock=false
-    - name: list ssh key directory
-      run: |
-          ls -alh ${GITHUB_WORKSPACE}/ansible/files/
     - name: list inventories
       run: |
-          ls -alh
-    - name: pwd
+          ls -alh ${GITHUB_WORKSPACE}/ansible/files/
+    - name: stashing the sshkey
       run: |
-          pwd           
-    - uses: actions/upload-artifact@v3
-      with:
-        name: sshkey.pem
-        path: ./sshkey.pem
+          git add ${GITHUB_WORKSPACE}/ansible/files/sshkey.pem
+          git stash push -m "sshkey" ${GITHUB_WORKSPACE}/ansible/files/sshkey.pem
+    - name: list inventories
+      run: |
+          ls -alh ${GITHUB_WORKSPACE}/ansible/files/
+    #- name: pwd
+    #  run: |
+    #      pwd           
+    #- uses: actions/upload-artifact@v3
+    #  with:
+    #    name: sshkey.pem
+    #    path: ./sshkey.pem
 
       
   deploy-configmanagement:
@@ -70,10 +74,13 @@ jobs:
     steps:
     - name: checkout Repo
       uses: actions/checkout@v1
-    - uses: actions/download-artifact@v3
-      with:
-        name: sshkey.pem
-        path: ${GITHUB_WORKSPACE}/ansible/files/sshkey.pem
+    #- uses: actions/download-artifact@v3
+    #  with:
+    #    name: sshkey.pem
+    #    path: ${GITHUB_WORKSPACE}/ansible/files/sshkey.pem
+    - name: stashing the sshkey
+      run: |
+        git stash pop
     - name: list ssh key directory
       run: |
           ls -alh ./ansible/files
