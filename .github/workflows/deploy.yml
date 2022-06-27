@@ -65,9 +65,9 @@ jobs:
       with:
         name: sshkey
         path: ./files/sshkey.pem
-    - name: list ssh ke directory
-        run: |
-          ls -alh ./files
+    - name: list ssh key directory
+      run: |
+          ls -alh ./*
     - name: set up python 3.7
       uses: actions/setup-python@v1
       with:
