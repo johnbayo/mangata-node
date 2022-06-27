@@ -52,8 +52,8 @@ jobs:
         ls -alh ${GITHUB_WORKSPACE}/ansible/inventories/
     - name: pwd
       run: |
-         pwd           
-    - uses: actions/upload-artifact@master
+        pwd           
+    - uses: actions/upload-artifact@v3
       with:
         name: sshkey
         path: ${GITHUB_WORKSPACE}/ansible/files/sshkey.pem
@@ -70,7 +70,7 @@ jobs:
     steps:
     - name: checkout Repo
       uses: actions/checkout@v1
-    - uses: actions/download-artifact@master
+    - uses: actions/download-artifact@v3
       with:
         name: sshkey
         path: ${GITHUB_WORKSPACE}/ansible/files/sshkey.pem
