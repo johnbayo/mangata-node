@@ -47,10 +47,10 @@ jobs:
     - name: list inventories
       run: |
           ls -alh ${GITHUB_WORKSPACE}/ansible/files/
-    - name: stashing the sshkey
-      run: |
-          git add ${GITHUB_WORKSPACE}/ansible/files/sshkey.pem
-          git stash push -m "sshkey" ${GITHUB_WORKSPACE}/ansible/files/sshkey.pem
+    #- name: stashing the sshkey
+    #  run: |
+    #      git add ${GITHUB_WORKSPACE}/ansible/files/sshkey.pem
+    #      git stash push -m "sshkey" ${GITHUB_WORKSPACE}/ansible/files/sshkey.pem
     #- name: pwd
     #  run: |
     #      pwd           
@@ -60,10 +60,10 @@ jobs:
     #    path: ./sshkey.pem
 
       
-  deploy-configmanagement:
+  #deploy-configmanagement:
 
-    runs-on: ubuntu-latest
-    needs: deploy-infrastructure
+#    runs-on: ubuntu-latest
+#    needs: deploy-infrastructure
     defaults:
       run:
         working-directory: ./ansible
@@ -75,9 +75,9 @@ jobs:
     #  with:
     #    name: sshkey.pem
     #    path: ${GITHUB_WORKSPACE}/ansible/files/sshkey.pem
-    - name: stashing the sshkey
-      run: |
-        git stash pop
+    #- name: stashing the sshkey
+    #  run: |
+    #    git stash pop
     - name: list ssh key directory
       run: |
           ls -alh ./ansible/files
