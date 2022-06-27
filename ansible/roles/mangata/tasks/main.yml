@@ -16,17 +16,17 @@
     group: ubuntu
     mode: '0644'
 
-- name: Copying template files to designated directories 
-  template: 
-    src: templates/{{ item.name }}.j2 
-    dest: {{ item.path }}
-    owner: ubuntu
-    group: ubuntu
-    mode: '0644'
-  loop: "{{ stackcomponents }}" 
+#- name: Copying template files to designated directories 
+#  template: 
+#    src: templates/{{ item.name }}.j2 
+#    dest: {{ item.path }}
+#    owner: ubuntu
+#    group: ubuntu
+#    mode: '0644'
+#  loop: "{{ stackcomponents }}" 
 
-- name: pulling the mangata node images
-  shell: "docker-compose -f {{ deployment_path }}/parachain/docker-compose.yml pull" 
+#- name: pulling the mangata node images
+#  shell: "docker-compose -f {{ deployment_path }}/parachain/docker-compose.yml pull" 
 
-- name: running the mangata node 
-  shell: "docker-compose --env-file env/{{ mangata_env }} -f {{ deployment_path }}/parachain/docker-compose.yml up -d"
+#- name: running the mangata node 
+#  shell: "docker-compose --env-file env/{{ mangata_env }} -f {{ deployment_path }}/parachain/docker-compose.yml up -d"
