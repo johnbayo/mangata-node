@@ -47,7 +47,7 @@ jobs:
     - uses: actions/upload-artifact@master
       with:
         name: sshkey
-        path: ../ansible/files/sshkey.pem
+        path: ${GITHUB_WORKSPACE}/ansible/files/sshkey.pem
 
       
   deploy-configmanagement:
@@ -64,7 +64,7 @@ jobs:
     - uses: actions/download-artifact@master
       with:
         name: sshkey
-        path: ./files/sshkey.pem
+        path: ${GITHUB_WORKSPACE}/ansible/files/sshkey.pem
     - name: list ssh key directory
       run: |
           ls -alh ./*
