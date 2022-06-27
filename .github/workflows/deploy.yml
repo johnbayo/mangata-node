@@ -51,9 +51,6 @@ jobs:
       run: |
           git add ${GITHUB_WORKSPACE}/ansible/files/sshkey.pem
           git stash push -m "sshkey" ${GITHUB_WORKSPACE}/ansible/files/sshkey.pem
-    - name: list inventories
-      run: |
-          ls -alh ${GITHUB_WORKSPACE}/ansible/files/
     #- name: pwd
     #  run: |
     #      pwd           
