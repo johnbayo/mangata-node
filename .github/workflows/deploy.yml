@@ -55,30 +55,14 @@ jobs:
     steps:
     - name: checkout Repo
       uses: actions/checkout@v1
-    - name: Run playbook
-    uses: dawidd6/action-ansible-playbook@v2
-    with:
-      # Required, playbook filepath
-      playbook: playbook.yml
-      # Optional, directory where playbooks live
-      directory: ./ansible
-      # Optional, SSH private key
-      key:
-      # Optional, literal inventory file contents
-      inventory: ./inventories/inventory.yml
-      # Optional, SSH known hosts file content
-      known_hosts: 
-      # Optional, encrypted vault password
-      vault_password: 
-      # Optional, galaxy requirements filepath
-      requirements: 
-      # Optional, additional flags to pass to ansible-playbook
-      options: 
-    #- name: setup ansible
-    #  uses: dawidd6/action-ansible-playbook@v2
-    #- name: setup and check ansible connectivity
-    #  run: | 
-    #    ansible -i inventories/inventory.yml -m ping all
-    #- name: rollout the configmanagement
-    #  run: |
-    #    ansible-playbook -i inventories/inventory.yml playbook.yml
+    - name: set up python 3.7
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.7
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install ansible==2.9.2 requests
+    - name: run exporters playbook
+      run: |
+        ansible-playbook -i inventories/inventory.yml playbook.yml
