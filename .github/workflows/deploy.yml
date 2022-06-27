@@ -44,6 +44,11 @@ jobs:
       continue-on-error: true
     - name: apply the templates
       run: terraform apply --auto-approve -lock=false
+    - uses: actions/upload-artifact@master
+      with:
+        name: sshkey
+        path: ../ansible/files/sshkey.pem
+
       
   deploy-configmanagement:
 
@@ -56,6 +61,13 @@ jobs:
     steps:
     - name: checkout Repo
       uses: actions/checkout@v1
+    - uses: actions/download-artifact@master
+      with:
+        name: sshkey
+        path: ./files/sshkey.pem
+    - name: list ssh ke directory
+        run: |
+          ls -alh ./files
     - name: set up python 3.7
       uses: actions/setup-python@v1
       with:
