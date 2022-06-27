@@ -45,9 +45,10 @@ jobs:
     - name: apply the templates
       run: terraform apply --auto-approve -lock=false
       
-#  deploy-configmanagement:
+  deploy-configmanagement:
 
     runs-on: ubuntu-latest
+    needs: deploy-infrastructure
     defaults:
       run:
         working-directory: ./ansible
