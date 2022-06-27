@@ -69,8 +69,8 @@ jobs:
         working-directory: ./ansible
       
     steps:
-    - name: checkout Repo
-      uses: actions/checkout@v3
+    #- name: checkout Repo
+    #  uses: actions/checkout@v3
     #- uses: actions/download-artifact@v3
     #  with:
     #    name: sshkey.pem
