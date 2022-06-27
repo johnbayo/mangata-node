@@ -56,7 +56,7 @@ jobs:
     - uses: actions/upload-artifact@v3
       with:
         name: sshkey
-        path: ${GITHUB_WORKSPACE}/ansible/files/sshkey.pem
+        path: ${GITHUB_WORKSPACE}/ansible/files/
 
       
   deploy-configmanagement:
