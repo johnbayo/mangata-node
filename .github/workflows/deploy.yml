@@ -78,10 +78,6 @@ jobs:
     #- name: stashing the sshkey
     #  run: |
     #    git stash pop
-    - name: list ssh key directory
-      working-directory: ./ansible
-      run: |
-          ls -alh ./ansible/files
     - name: set up python 3.7
       uses: actions/setup-python@v1
       with:
