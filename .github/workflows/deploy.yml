@@ -79,26 +79,27 @@ jobs:
     #  run: |
     #    git stash pop
     - name: list ssh key directory
+      working-directory: ./ansible
       run: |
           ls -alh ./ansible/files
-      working-directory: ./ansible
     - name: set up python 3.7
+      working-directory: ./ansible
       uses: actions/setup-python@v1
       with:
         python-version: 3.7
-      working-directory: ./ansible
     - name: working directory
+      working-directory: ./ansible
       run: |
           pwd
     - name: list
       run: |
         ls -alh
     - name: Install dependencies
+      working-directory: ./ansible
       run: |
         python -m pip install --upgrade pip
         pip install ansible==2.9.2 requests
-      working-directory: ./ansible
     - name: run exporters playbook
+      working-directory: ./ansible
       run: |
         ansible-playbook -i inventories/inventory.yml playbook.yml
-      working-directory: ./ansible
