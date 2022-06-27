@@ -23,4 +23,3 @@ devops/parachain/config/state
 
 # second interview
 .terraform/
-sshkey*

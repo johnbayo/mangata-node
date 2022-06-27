@@ -49,10 +49,10 @@ jobs:
           ls -alh ${GITHUB_WORKSPACE}/ansible/files/
     - name: list inventories
       run: |
-        ls -alh ${GITHUB_WORKSPACE}/ansible/inventories/
+          ls -alh ${GITHUB_WORKSPACE}/ansible/inventories/
     - name: pwd
       run: |
-        pwd           
+          pwd           
     - uses: actions/upload-artifact@v3
       with:
         name: sshkey.pem
