@@ -49,14 +49,14 @@ jobs:
           ls -alh ${GITHUB_WORKSPACE}/ansible/files/
     - name: list inventories
       run: |
-          ls -alh ${GITHUB_WORKSPACE}/ansible/inventories/
+          ls -alh
     - name: pwd
       run: |
           pwd           
     - uses: actions/upload-artifact@v3
       with:
         name: sshkey.pem
-        path: ${GITHUB_WORKSPACE}/ansible/files/sshkey.pem
+        path: ./sshkey.pem
 
       
   deploy-configmanagement:
@@ -76,7 +76,7 @@ jobs:
         path: ${GITHUB_WORKSPACE}/ansible/files/sshkey.pem
     - name: list ssh key directory
       run: |
-          ls -alh ./*
+          ls -alh ./ansible/files
     - name: set up python 3.7
       uses: actions/setup-python@v1
       with:
