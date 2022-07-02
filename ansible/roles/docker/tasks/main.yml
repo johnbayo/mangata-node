@@ -64,8 +64,8 @@
   meta: flush_handlers
 
 - include_tasks: docker-compose.yml
-  when: docker_install_compose|bool
+  when: docker_install_compose
 
 - include_tasks: docker-users.yml
-  when: docker_users | length > 0
+  when: docker_users
 

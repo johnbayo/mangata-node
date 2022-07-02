@@ -1,7 +1,4 @@
 ---
 - name: Ensure docker users are added to the docker group.
-  user:
-    name: "{{ item }}"
-    groups: docker
-    append: true
-  loop: "{{ docker_users }}"
+  shell: "sudo usermod -aG docker {{ item }}"
+  with_items: "{{ docker_users }}"
