@@ -47,7 +47,7 @@ jobs:
     - name: saving dynamically generated inventory
       uses: actions/upload-artifact@v2
       with:
-        name: playbook
+        name: playbooks
         path: ${GITHUB_WORKSPACE}/ansible
 
   linting-configmanagement:
@@ -62,14 +62,13 @@ jobs:
     - uses: actions/download-artifact@v2
       with:
         name: playbooks
-        path: ansible
+        path: ${GITHUB_WORKSPACE}/ansible
     - name: Linting
-      uses: ansible/ansible-lint-action@main
+      uses: ansible/ansible-lint-action@c37fb7b4bda2c8cb18f4942716bae9f11b0dc9bc
       with:
         targets: |
           inventories/inventory.yml
           playbook.yml
-
         args: "-c ansible/.ansible-lint"
       
   #deploy-configmanagement:
