@@ -68,7 +68,8 @@ jobs:
       working-directory: ./ansible
       run: |
         python -m pip install --upgrade pip
-        pip install ansible-lint requests 
+        pip install ansible==2.9.2 requests 
+        pip install ansible-lint 
     - name: Linting
       working-directory: ./ansible
       run: |
@@ -94,6 +95,10 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install ansible==2.9.2 requests 
+    - name: adjust permissions
+      working-directory: ./ansible
+      run: |
+        chmod 400 files/*.pem
     - name: run exporters playbook
       working-directory: ./ansible
       run: |
