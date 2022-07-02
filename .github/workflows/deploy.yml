@@ -45,7 +45,7 @@ jobs:
     - name: apply the templates
       run: terraform apply --auto-approve -lock=false
     - name: saving dynamically generated inventory
-      working-directory: ${GITHUB_WORKSPACE}
+      working-directory: ./
       uses: actions/upload-artifact@v2
       with:
         name: playbooks
