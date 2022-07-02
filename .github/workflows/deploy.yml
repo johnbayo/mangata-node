@@ -44,8 +44,11 @@ jobs:
       continue-on-error: true
     - name: apply the templates
       run: terraform apply --auto-approve -lock=false
+
+    - name: change working directory
+      run: cd ..
+      
     - name: saving dynamically generated inventory
-      working-directory: ./
       uses: actions/upload-artifact@v2
       with:
         name: playbooks
