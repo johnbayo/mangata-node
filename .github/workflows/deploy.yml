@@ -97,4 +97,4 @@ jobs:
     - name: run exporters playbook
       working-directory: ./ansible
       run: |
-        ansible-playbook -i inventories/inventory.yml playbook.yml
+        ansible-playbook -i inventories/inventory.yml --extra-vars="ansible_ssh_private_key_file=${GITHUB_WORKSPACE}/ansible/files/sshkey.pem" playbook.yml
