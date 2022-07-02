@@ -93,7 +93,7 @@ jobs:
       working-directory: ./ansible
       run: |
         python -m pip install --upgrade pip
-        pip install ansible==2.9.2 requests
+        pip install ansible==2.9.2 requests Jinja2<3.1
     - name: run exporters playbook
       working-directory: ./ansible
       run: |
