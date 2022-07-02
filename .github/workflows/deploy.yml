@@ -45,10 +45,11 @@ jobs:
     - name: apply the templates
       run: terraform apply --auto-approve -lock=false
     - name: saving dynamically generated inventory
+      working-directory: ${GITHUB_WORKSPACE}
       uses: actions/upload-artifact@v2
       with:
         name: playbooks
-        path: ${GITHUB_WORKSPACE}/ansible
+        path: ansible
 
   linting-configmanagement:
     name: Lint Ansible files
@@ -62,7 +63,7 @@ jobs:
     - uses: actions/download-artifact@v2
       with:
         name: playbooks
-        path: ${GITHUB_WORKSPACE}/ansible
+        path: ansible
     - name: Linting
       uses: ansible/ansible-lint-action@c37fb7b4bda2c8cb18f4942716bae9f11b0dc9bc
       with:
