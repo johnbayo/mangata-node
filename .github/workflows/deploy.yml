@@ -64,12 +64,27 @@ jobs:
       with:
         name: playbooks
         path: ansible
+    - name: pwd
+      run: |
+          pwd  
+    - name: list ansible
+      run: |
+          ls -alh ${GITHUB_WORKSPACE}/
+    - name: list ansible
+      run: |
+          ls -alh ${GITHUB_WORKSPACE}/ansible/
+    - name: list inventories
+      run: |
+          ls -alh ${GITHUB_WORKSPACE}/ansible/inventories
+    - name: list ssh
+      run: |
+          ls -alh ${GITHUB_WORKSPACE}/ansible/files
     - name: Linting
       uses: ansible/ansible-lint-action@c37fb7b4bda2c8cb18f4942716bae9f11b0dc9bc
       with:
         targets: |
-          inventories/inventory.yml
-          playbook.yml
+          ansible/inventories/inventory.yml
+          ansible/playbook.yml
         args: "-c ansible/.ansible-lint"
       
   deploy-configmanagement:
