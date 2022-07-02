@@ -3,9 +3,12 @@
   vars_files:
     - "vars/main.yml"
     - "defaults/main.yml"
-  become: true
   gather_facts: true
-  roles:
-    - docker
-    - mangata
+  tasks:
+    - include_role: 
+        name: docker
+      become: true
 
+    - include_role:
+        name: mangata
+      become: false

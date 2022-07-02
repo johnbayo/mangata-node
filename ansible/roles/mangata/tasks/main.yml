@@ -5,28 +5,30 @@
     state: directory
     owner: ubuntu
     group: ubuntu
-    mode: '0644'
+    mode: '0755'
 
 - name: copy mangata deployment directory recursively to its path 
   copy:
     src: "../devops/"
-    dest: "{{ mangata_directory_name }}" 
-    directory_mode: yes
+    dest: "{{ mangata_directory_name }}"
     owner: ubuntu
     group: ubuntu
-    mode: '0644'
+    mode: '0755'
 
-#- name: Copying template files to designated directories 
-#  template: 
-#    src: templates/{{ item.name }}.j2 
-#    dest: {{ item.path }}
-#    owner: ubuntu
-#    group: ubuntu
-#    mode: '0644'
-#  loop: "{{ stackcomponents }}" 
+- name: Copying template files to designated directories 
+  template: 
+    src: "templates/{{ item.name }}.j2"
+    dest: "{{ item.path }}/{{ item.name }}"
+    owner: ubuntu
+    group: ubuntu
+    mode: 0755
+  loop: "{{ stackcomponents }}" 
 
-#- name: pulling the mangata node images
-#  shell: "docker-compose -f {{ deployment_path }}/parachain/docker-compose.yml pull" 
+- name: pulling the mangata node images
+  shell: "docker-compose --env-file {{ deployment_path }}/parachain/env/{{ mangata_env }} -f {{ deployment_path }}/parachain/docker-compose.yml pull" 
 
-#- name: running the mangata node 
-#  shell: "docker-compose --env-file env/{{ mangata_env }} -f {{ deployment_path }}/parachain/docker-compose.yml up -d"
+- name: build image context 
+  shell: "docker-compose --env-file {{ deployment_path }}/parachain/env/{{ mangata_env }} -f {{ deployment_path }}/parachain/docker-compose.yml build"
+
+- name: running the mangata node 
+  shell: "docker-compose --env-file {{ deployment_path }}/parachain/env/{{ mangata_env }} -f {{ deployment_path }}/parachain/docker-compose.yml up -d"
