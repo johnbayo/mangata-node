@@ -1,11 +1,11 @@
-# terraform
+# Terraform
 This terraform module will deploy a virtual machine, ssh keys, elastic ip, internet gateway, vpc and subnets <br/>
 <br/>
 ## Requirements<br/>
 access key<br/>
 secret key<br/>
 <br/>
-## module Values
+## Module Values
 <br/>
 Available values are listed below, along with variables <br/>
 values.auto.tfvars<br/>
@@ -25,14 +25,11 @@ private_ipaddress = ["172.16.0.100"]
 inventory_path    = "../ansible/inventories"
 </pre>
 <br/>
-The docker_edition should be either ce (Community Edition) or ee (Enterprise Edition). <br/>
 <br/>
-</pre>
-<br/>
-## Terraform installation options.<br/>
+## Terraform installation <br/>
 hashicorp/setup-terraform@v2<br/><br/>
 <br/>
-deployment of the module<br/>
+## Deployment of the module<br/>
 <pre>
 terraform apply --auto-aprove -lock=false
 </pre>
