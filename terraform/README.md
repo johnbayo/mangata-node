@@ -1,5 +1,5 @@
 # Terraform
-This terraform module will deploy a virtual machine, ssh keys, elastic ip, internet gateway, vpc and subnets <br/>
+This terraform module will deploy a virtual machine, ssh keys, elastic ip, internet gateway, vpc, routes and subnets <br/>
 <br/>
 
 ## Requirements
