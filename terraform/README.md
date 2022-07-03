@@ -1,10 +1,13 @@
 # Terraform
 This terraform module will deploy a virtual machine, ssh keys, elastic ip, internet gateway, vpc and subnets <br/>
 <br/>
-## Requirements<br/>
+
+## Requirements
+<br/>
 access key<br/>
 secret key<br/>
 <br/>
+
 ## Module Values
 <br/>
 Available values are listed below, along with variables <br/>
@@ -25,15 +28,18 @@ private_ipaddress = ["172.16.0.100"]
 inventory_path    = "../ansible/inventories"
 </pre>
 <br/>
+
+## Terraform installation
+hashicorp/setup-terraform@v2<br/>
 <br/>
-## Terraform installation <br/>
-hashicorp/setup-terraform@v2<br/><br/>
-<br/>
-## Deployment of the module<br/>
+
+## Deployment of the module
 <pre>
 terraform apply --auto-aprove -lock=false
 </pre>
 <br/>
-License<br/>
-<br/>
-MIT / BSD
+
+## License
+This project is licensed under the GPLv3 License - see the [LICENSE](LICENSE.md) file for details. For more informations: [License Article]
+
+## MIT / BSD
