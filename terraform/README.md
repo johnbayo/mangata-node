@@ -1,11 +1,11 @@
 # terraform
 This terraform module will deploy a virtual machine, ssh keys, elastic ip, internet gateway, vpc and subnets <br/>
 <br/>
-Requirements<br/>
+## Requirements<br/>
 access key<br/>
 secret key<br/>
 <br/>
-module Values
+## module Values
 <br/>
 Available values are listed below, along with variables <br/>
 values.auto.tfvars<br/>
@@ -29,7 +29,7 @@ The docker_edition should be either ce (Community Edition) or ee (Enterprise Edi
 <br/>
 </pre>
 <br/>
-Terraform installation options.<br/>
+## Terraform installation options.<br/>
 hashicorp/setup-terraform@v2<br/><br/>
 <br/>
 deployment of the module<br/>
