@@ -1,5 +1,5 @@
 # Mangata
-This ansible role will install the latest Docker version, Docker Compose and setup docker users, deploy Mangata nodes on Ubuntu, Mangata Deployment.<br/>
+This ansible role will install the latest Docker version, Docker Compose and setup docker users, deploy Mangata nodes on Ubuntu.<br/>
 <br/>
 
 ## Requirements<br/>
