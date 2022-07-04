@@ -1,14 +1,14 @@
 name: Deployment
 
-#on: 
-#  pull_request:
-#    branches:
-#      - '**'
+on: 
+  pull_request:
+    branches:
+      - '**'
 
-on:
-  push: 
-    branches: 
-      - feature/second-interview 
+#on:
+#  push: 
+#    branches: 
+#      - feature/second-interview 
   
 env:
   DEPLOY_DIR: "terraform/"
