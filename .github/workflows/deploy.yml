@@ -2,7 +2,8 @@ name: Deployment
 
 on: 
   pull_request:
-    branches: [*]
+    branches:
+      - '**'
   
 env:
   DEPLOY_DIR: "terraform/"
